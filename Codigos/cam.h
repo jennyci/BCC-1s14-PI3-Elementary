@@ -1,9 +1,9 @@
 #include <opencv/hoghgui.h>
 #include <allegro5/allegro.h>
 typedef struct {
-  unsigned char ***quadro;
-  int largura, altura;
-  CvCapture *capture;
+  unsigned char ***camQuadro;
+  int camLargura, camAltura;
+  CvCapture *camCapture;
 } camera;
 camera *camera_inicializa(int i);
 void finalizarCamera(camera *cam);
