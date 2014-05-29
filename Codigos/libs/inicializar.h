@@ -1,0 +1,3 @@
+
+void iniciarAllegro();
+void finalizarAllegro();

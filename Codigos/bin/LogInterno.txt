@@ -1,0 +1,24 @@
+9:27:1 25/5/2014 - "Jogo Iniciado!"
+--
+9:27:1 25/5/2014 - "Registro de eventos!"
+--
+9:27:1 25/5/2014 - "Sucesso ao carregar e criar fonte, imagens e eventos."
+--
+9:27:1 25/5/2014 - "Registro de eventos!"
+--
+9:27:7 25/5/2014 - "Jogo Iniciado!"
+--
+9:27:7 25/5/2014 - "Registro de eventos!"
+--
+9:27:7 25/5/2014 - "Sucesso ao carregar e criar fonte, imagens e eventos."
+--
+9:27:7 25/5/2014 - "Registro de eventos!"
+--
+9:27:48 25/5/2014 - "Jogo Iniciado!"
+--
+9:27:49 25/5/2014 - "Registro de eventos!"
+--
+9:27:49 25/5/2014 - "Sucesso ao carregar e criar fonte, imagens e eventos."
+--
+9:27:49 25/5/2014 - "Registro de eventos!"
+--
