@@ -1,0 +1,28 @@
+\select@language {brazil}
+\contentsline {section}{\numberline {1}Resumo}{2}
+\contentsline {paragraph}{}{2}
+\contentsline {section}{\numberline {2}Abstract}{2}
+\contentsline {paragraph}{}{2}
+\contentsline {section}{\numberline {3}Introdu\c c\~ao}{2}
+\contentsline {paragraph}{}{2}
+\contentsline {paragraph}{}{2}
+\contentsline {paragraph}{}{2}
+\contentsline {paragraph}{}{2}
+\contentsline {section}{\numberline {4} Estado da arte}{3}
+\contentsline {paragraph}{}{3}
+\contentsline {section}{\numberline {5} Elementary}{3}
+\contentsline {paragraph}{}{3}
+\contentsline {paragraph}{}{3}
+\contentsline {subsection}{\numberline {5.1}Exemplo}{3}
+\contentsline {paragraph}{}{3}
+\contentsline {section}{\numberline {6}Tratamento de imagem}{3}
+\contentsline {paragraph}{}{3}
+\contentsline {subsection}{\numberline {6.1}Grayscale}{3}
+\contentsline {paragraph}{}{3}
+\contentsline {subsection}{\numberline {6.2}Limiariza\c c\~ao(Thresholding)}{4}
+\contentsline {paragraph}{}{4}
+\contentsline {subsection}{\numberline {6.3}Medianas}{4}
+\contentsline {paragraph}{}{4}
+\contentsline {section}{\numberline {7}Conclus\~ao}{4}
+\contentsline {paragraph}{}{4}
+\contentsline {section}{\numberline {8}Refer\^encias Bibliogr\'aficas}{4}

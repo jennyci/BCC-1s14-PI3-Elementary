@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
+\title{\textbf{Elementary.}}
+\author{Davi S. Meneses, Jennifer C. P. Silva, Raldney S. Alves}
+\date{Junho de 2014}
+
+%%\includegraphics{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Resumo}
+\paragraph{}
+
+   O nome do jogo é \textbf{Elementary} e foi desenvolvido durante o terceiro período de Bacharelado em Ciência da Computação - Centro Universitário  Senac - na disciplina de Projeto Interativo III.\\
+   Os requisitos para a criação do jogo foi a utilização da linguagem C-99, com as bibliotecas Allegro 5 e OpenCv. Os algoritmos utilizados foram baseados em conceitos de processamento de imagens para obter maior eficacia no rastreamento das cores.
+   O desenvolvimento será descrito neste artigo, incluindo descrição e explicação para cada algoritmo utilizado.
+
+\section{Abstract}
+\paragraph{}
+   The name of game is \textbf{Elementary}, has been developed during the third period of BS in Computer Science - Centro Universitário Senac - in the classes of Interactive Project III. 
+   The requists for the creation of the game was the utilization of language C-99, with your libraries Allegro 5 and OpenCV. The algorithms utilized were  based on concepts of image processing for get better eficiency in the tracking of colors. The development will be described on this article, including description and explication for each algorithm utilized.
+ 
+ 
+\section{Introdução}
+\paragraph{}
+O grande avanço da computação gráfica proporcionou uma melhora na qualidade do processamento das cores e algoritmos mais simples, porem mais eficazes para que fosse possível maior captação de detalhes.
+\paragraph{}
+Durante o tratamento de uma imagem é utilizado muitas fórmulas matemáticas para que seja calculado a tonalidade e frequência de cor dos pixel, tanto para saber a qual escala de cor ele pertence como também para separar elementos de uma imagem ou até mesmo melhorar a qualidade visual delas.
+\paragraph{}
+No mercado atualmente se utiliza uma grande quantidade de softwares para edição de imagem e todos eles possuem grande quantidade de fórmulas matemáticas e algoritmos computacionais por trás e também conhecimentos baseados em física para obter melhores resultados para os olhos humanos.
+\paragraph{}    
+O desenvolvimento do jogo fora proposto durante as aulas de PI-III quando se viu uma grande facilidade na interação da câmera para com o tema do jogo no qual é para a destruição de discos, pois não exigiria muito da câmera, pelo motivo de possuir pouca complexidade, no entanto, com grande abrangimento de informações na qual precisaria para o seu desenvolvimento, que proporcionou um grande aprendizado.
+   
+   \section{ Estado da arte}
+   \paragraph{}
+ A utilização de vários algoritmos para o tratamento da imagem e para o rastreamento tornou o Elementary preciso e extremamente funcional, foram testados vários
+ Algoritmos para diferentes testes onde, os melhores resultados foram mantidos, e melhorados buscando um rastreamento limpo, um reconhecimento preciso e um jogo totalmente funcional, onde o(s) jogador(es) consegue(m) ter uma experiência divertida e desafiadora.A utilização de um Ranking torna a jogatina mais interessante e nervosa, pois se alguém quer brigar pelo primeiro lugar contra um amigo a situação se transforma e acaba virando um campeonato.
+\section{ Elementary}
+\paragraph{}
+   \textbf{Elementary} é um jogo que possui como objetivo acertar os discos do elemento selecionado no início do jogo. No caso os discos estarão caindo verticalmente na tela do jogo e é necessário uma certa agilidade e cuidado para não acertar os outros dois discos e não deixar os discos do prórpio elemento sairem da tela, pois só haverá três chances para errar o disco. Os outros discos serão sempre usados para acabar o jogo e/ou os discos ganharem velocidade.
+   \paragraph{}
+  O cenário varia conforme os acertos e no final é dado um ranking com os acertos do jogador.
+		\subsection{Exemplo}
+		\paragraph{}
+  O elemento escolhido no começo do jogo seja Fogo, o disco que é proibido acertar é o de água, pois se acertado o jogo é finalizado no mesmo instante, e se acertar o elemento planta os discos ganham velocidade.
+ 
+\section{Tratamento de imagem}
+\paragraph{}
+Durante o processo de desenvolvimento do jogo foram analisados diversos recursos para tratamento de imagens com o intuito de obter melhores resultados durante a execução do jogo, tendo como alvo principal a maior eficiência no rastreamento da imagem. As técnicas aplicadas ao jogo foram a limiarização(Thresholding), o cálculo das medianas
+\subsection{Grayscale}
+\paragraph{}
+Antes de aplicar qualquer tratamento à imagem obtida é usada o método de conversão das cores para que a imagem fique em tons de cinza, tendo em vista maiores resultados durante a aplicação do tratamento, pois haveria apenas variação de luminosidade. 
+\subsection{Limiarização(Thresholding)}
+\paragraph{}
+O Thresholding é um dos métodos de segmentação em imagens mais utilizados, pois possui grande simplicidade e eficiência, ele baseia-se com a tonalidade de cada pixel, onde possui um histograma de picos para que haja uma segmentação desses picos, efetuando a divisão da imagem, ou seja, separando o objeto que deseja ser observado do resto.
+
+\subsection{Medianas}
+\paragraph{}
+O uso das medianas é para "filtrar" a imagem, ou seja, retirar todos os ruídos que contem nela, e com isso obtendo uma imagem mais nítida livre de "pontinhos", ou apenas com a redução deles.  
+
+ 
+\section{Conclusão}
+\paragraph{}
+O avanço da computação gráfica nos proporcionou a criação do Elementary, que, devido aos algoritmos utilizado, é um jogo funcional e preciso. Alguns algoritmos foram testados buscando a melhor resposta para o rastreamento e qualidade da imagem pois viu-se a necessidade de ter um bom rastreamento para que o Elementary funciona-se com maior precisão na hora  da destruição dos discos, representando alguns elementos da natureza, tais como: Fogo, Água e Planta. Caso um determinado elemento tenha fraqueza a outro, como por exemplo: Fogo e Água, o jogo é finalizado, ocasionando a derrota do jogador e  deixando o jogo um pouco mais complicado.
+
+\section{Referências Bibliográficas}
+\bibliographystyle{plain}
+\begin{thebibliography}{1}
+
+\bibitem{TOLEDO.R}
+
+\newblock {\em TOLEDO.R. Tutoriais Allegro 5. Disponível em: http://www.rafaeltoledo.net/tutoriais-allegro-5/}.Último acesso em Novembro de 2013.
+
+\bibitem{Liesenberg}
+
+\newblock {\em Liesenberg. Introdução à Programação em C com Jogos 2D. Disponível em: https://sites.google.com/a/liesenberg.biz/cjogos/home/recursos/allegro-5}.Último acesso em Novembro de 2013.
+
+\end{thebibliography}
+\end{document}
