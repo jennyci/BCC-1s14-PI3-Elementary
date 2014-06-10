@@ -6,6 +6,8 @@
 #include "../libs/camera.h"
 #define FPS 60
 
+
+
 void RGB2HSV(int red, int green, int blue, int *h, int *s, int *v){
   float r = (float)red/255;
   float g = (float)green/255;
@@ -183,23 +185,27 @@ int main() {
   al_start_timer(timer);
 
   /**********/
-  
-
+  disco *fogo = NULL;
+  fogo->boceta = '3';
+ // fogo->elemento = al_load_bitmap("Imagens/fogo.png");
+ /* if(!fogo->elemento){
+    erro("Falha ao carregar elemento");
+  }
+  /*fogo->pos_x = 10;
+  fogo->pos_y = 50;*/
   unsigned char ***matriz = camera_aloca_matriz(cam);
 
   ALLEGRO_COLOR cor = al_map_rgb_f(0, 255, 0);
 
   ALLEGRO_BITMAP *buffer = al_get_backbuffer(display);
   ALLEGRO_BITMAP *fundo = al_load_bitmap("Imagens/Elementary2.png");
-  ALLEGRO_BITMAP *disco1 = al_load_bitmap("Imagens/fogo.png");
-  ALLEGRO_BITMAP *disco2 = al_load_bitmap("Imagens/planta.png");
-  ALLEGRO_BITMAP *disco3 = al_load_bitmap("Imagens/agua.png");
+/*
   if(!disco1)
     erro("erro ao carregar disco1.png");
   if(!disco2)
     erro("erro ao carregar disco2.png");
   if(!disco3)
-    erro("erro ao carregar disco3.png");
+    erro("erro ao carregar disco3.png");*/
 
   //ALLEGRO_BITMAP *escolha = al_load_bitmap("Imagens/Elementary.png");
   if(!fundo)
@@ -241,9 +247,9 @@ int main() {
       /**********/
         al_set_target_bitmap(esquerda);
          al_draw_bitmap(fundo,0,0,0);
-         al_draw_bitmap(disco3,10,0,0);
-         al_draw_bitmap(disco2,50,0,0);
-         al_draw_bitmap(disco1,100,0,0);
+         //al_draw_bitmap(fogo->elemento,30,50,0);
+         /*al_draw_bitmap(disco2,50,0,0);
+         al_draw_bitmap(disco1,100,0,0);*/
 
         cameraRastreia(matriz,cam,esquerda,&x,&y);//ONDE FICARÁ O ALLEGRO
         if(x >=40 && x<=200 )
