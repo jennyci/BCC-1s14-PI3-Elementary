@@ -1,10 +1,7 @@
 #include <opencv/highgui.h>
 
 #include <allegro5/allegro.h>
-typedef struct {
-  char boceta;
-  //ALLEGRO_BITMAP *elemento;
-} disco;
+
 
 
 typedef struct {

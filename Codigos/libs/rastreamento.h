@@ -1,2 +1,0 @@
-void Ball();
-void Allegro();

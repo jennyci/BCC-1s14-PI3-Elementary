@@ -12,7 +12,7 @@ camera.o: lib/camera.c lib/camera.h
 	$(CC) $(FLAGS) $< -c
 
 Elementary: src/elementary.c bin/camera.o
-	$(CC) $(FLAGS) $^ -o $@ $(LIBS)
+	$(CC) $(FLAGS) $^ -o $@ -Wall -Werror -O2 -pedantic $(LIBS)
 
 clean:
 	rm -f *~ *.o
