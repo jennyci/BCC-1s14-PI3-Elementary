@@ -1,4 +1,4 @@
-#include "camera.h"
+#include "bibliotecas.h"
 
 
 
