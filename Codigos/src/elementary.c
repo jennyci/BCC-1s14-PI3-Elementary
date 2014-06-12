@@ -1,8 +1,11 @@
 #include <stdio.h>
+#include <time.h>
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h> 
 #include "../libs/camera.h"
 #define FPS 60
 
@@ -73,7 +76,7 @@ void RGB2HSV(int red, int green, int blue, int *h, int *s, int *v){
   
     *v = cMax * 100;
 }
-void cameraRastreia(unsigned char ***matriz, camera *cam,  ALLEGRO_BITMAP *direita,int *px, int *py){
+void cameraRastreia( camera *cam,int *px, int *py){
 
   camera_atualiza(cam);
     int x = 0, y = 0;
@@ -154,6 +157,10 @@ void mediana(camera *cam){
 }
 
 int main() {
+  bool menu = true;
+
+ALLEGRO_COLOR  font_color;
+    ALLEGRO_FONT *font;
   camera *cam = camera_inicializa(0);
   if(!cam)
     erro("erro na inicializacao da camera\n");
@@ -166,6 +173,13 @@ int main() {
 
   if(!al_init_image_addon())
     erro("erro na inicializacao do adicional de imagem\n");
+
+  al_init_font_addon();
+  al_init_ttf_addon();
+
+    font_color = al_map_rgb(0, 0, 0);
+    
+    font = al_load_ttf_font("Fontes/Blokletters-Viltstift.ttf", 20, 0);
 
   if(!al_init_primitives_addon())
     erro("erro na inicializacao do adicional de primitivas\n");
@@ -186,7 +200,8 @@ int main() {
   al_register_event_source(queue, al_get_display_event_source(display));
 
   al_start_timer(timer);
-
+  int fps,tempo = 10;
+  char seg[10];
   /**********/
   Disco *fogo = malloc(sizeof(Disco)), *agua= malloc(sizeof(Disco)), *planta = malloc(sizeof(Disco));
   //Criando o Disco de Fogo
@@ -259,16 +274,21 @@ fogo->elemento = al_load_bitmap("Imagens/fogo.png");
          al_draw_bitmap(fogo->elemento,fogo->pos_x,fogo->pos_y,0);
          al_draw_bitmap(agua->elemento,agua->pos_x,agua->pos_y,0);
          al_draw_bitmap(planta->elemento,planta->pos_x,planta->pos_y,0);
+         if(menu)
+      al_draw_text(font, font_color, 120, 200, 0, "Escolha um elemento para iniciar o Jogo");
 
       
 
-        cameraRastreia(matriz,cam,esquerda,&x,&y);//ONDE FICARÁ O ALLEGRO
+        cameraRastreia(cam,&x,&y);//ONDE FICARÁ O ALLEGRO
         if(x >=40 && x<=200 )
           if(y <=460 && y>=360 ){
             count++;
           }
         if(count >=10)
+            if(menu){
             fundo = al_load_bitmap("Imagens/galaxia.png");
+            menu = false;
+          }
             /**********/
           al_set_target_bitmap(direita);
           camera_copia(cam, cam->quadro, direita);

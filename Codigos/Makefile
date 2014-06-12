@@ -1,18 +1,18 @@
+CC= gcc -std=c99
+
+CFLAGS= -W -Wall -Werror -pedantic 
+
 TARGETS = Elementary
 
-CC = gcc
-
-FLAGS = -std=c99
-
-LIBS = -lopencv_core -lopencv_highgui -lallegro -lallegro_main -lallegro_image -lallegro_primitives
+LIBS = -lopencv_core -lopencv_highgui  -lallegro_font -lallegro_ttf -lallegro -lallegro_main -lallegro_image -lallegro_primitives
 
 all: $(TARGETS)
 
-camera.o: lib/camera.c lib/camera.h
-	$(CC) $(FLAGS) $< -c
+camera.o: libs/camera.c libs/camera.h
+	$(CC) $(CFLAGS) $< -c
 
-Elementary: src/elementary.c bin/camera.o
-	$(CC) $(FLAGS) $^ -o $@ -Wall -Werror -O2 -pedantic $(LIBS)
+Elementary: src/elementary.c camera.o
+	$(CC) $^ -o $@ $(CFLAGS) $(LIBS)
 
 clean:
 	rm -f *~ *.o
