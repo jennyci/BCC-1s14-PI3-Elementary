@@ -161,15 +161,19 @@ cameraRastreia(cam,&x,&y);
         if(menu){
           if(abrirJogo(x,y,&fps,&tempo,font, font_color)){
              fundo = al_load_bitmap("Imagens/galaxia.png");
+
                   menu = false;
                 }
-
-
         }
-
-        
-            
-       
+              al_draw_text(font, al_map_rgb(255, 255, 255), 240, 5, 0,"PONTUAÇÃO");
+              al_draw_bitmap(fogo->elemento,fogo->pos_x,fogo->pos_y,0);
+              fogo->pos_y+=10;
+              if(fogo->pos_y > 480){
+              al_draw_text(font, al_map_rgb(255, 255, 255), 240, 5, 0,"VOCÊ PERDEU INUTIL");
+          al_flip_display();
+              al_rest(5);
+              break;
+            }
             /**********/
           al_set_target_bitmap(direita);
           camera_copia(cam, cam->quadro, direita);
