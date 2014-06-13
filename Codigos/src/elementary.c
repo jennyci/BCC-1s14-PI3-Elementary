@@ -110,6 +110,8 @@ int main() {
   char pontuacao[100];
   ALLEGRO_COLOR  font_color;
   ALLEGRO_FONT *font,*font2;
+  ALLEGRO_AUDIO_STREAM *musica = NULL;
+  
   camera *cam = camera_inicializa(0);
   if(!cam)
     erro("erro na inicializacao da camera\n");
@@ -118,7 +120,7 @@ int main() {
   int altura = cam->altura;
   int fps = 0,tempo = 5;
   int ndisco = 9;
-
+ 
   if(!al_init())
     erro("erro na inicializacao do allegro\n");
 
@@ -149,6 +151,30 @@ int main() {
   ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
   if(!queue)
     erro("erro na criacao da fila\n");
+
+   if (!al_install_audio())
+    {
+        fprintf(stderr, "Falha ao inicializar áudio.\n");
+        return false;
+    }
+ 
+    if (!al_init_acodec_addon())
+    {
+        fprintf(stderr, "Falha ao inicializar codecs de áudio.\n");
+        return false;
+    }
+    if (!al_reserve_samples(1))
+    {
+        fprintf(stderr, "Falha ao alocar canais de áudio.\n");
+        return false;
+    }
+
+  musica = al_load_audio_stream("Audio/elementary.ogg", 4, 1024);
+  if(!musica)
+        erro("Erro na alocação da musica de fundo\n");
+
+  al_attach_audio_stream_to_mixer(musica, al_get_default_mixer());
+  al_set_audio_stream_playing(musica, true);
 
   al_register_event_source(queue, al_get_timer_event_source(timer));
   al_register_event_source(queue, al_get_display_event_source(display));
@@ -303,7 +329,7 @@ while(fri != 0){
   al_destroy_event_queue(queue);
   al_destroy_display(display);
   al_destroy_timer(timer);
-
+  al_destroy_audio_stream(musica);
   al_shutdown_primitives_addon();
   al_shutdown_image_addon();
   al_uninstall_system();

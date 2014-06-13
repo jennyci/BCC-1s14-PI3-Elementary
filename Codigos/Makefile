@@ -5,7 +5,7 @@ SRC = $(wildcard */*.c)
 OBJ = $(SRC:.c=.o)
 TARGETS = Elementary
 
-LIBS = -lopencv_core -lopencv_highgui  -lallegro_font -lallegro_ttf -lallegro -lallegro_main -lallegro_image -lallegro_primitives
+LIBS = -lopencv_core -lopencv_highgui -lallegro_audio -lallegro_acodec  -lallegro_font -lallegro_ttf -lallegro -lallegro_main -lallegro_image -lallegro_primitives
 
 all: $(TARGETS)
 
