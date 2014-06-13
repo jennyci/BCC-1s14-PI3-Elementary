@@ -90,8 +90,8 @@ void cameraRastreia( camera *cam,int *px, int *py){
     if(cnr > 15){
         x = cxr / cnr;
         y = cyr / cnr;
-        al_draw_circle(x, y, 50, al_map_rgb(0, 0, 255),2);
-        al_draw_filled_circle(x, y, 5, al_map_rgb(0, 0, 255));
+        al_draw_circle(x, y, 10, al_map_rgb(0, 0, 255),1);
+        al_draw_filled_circle(x, y, 2, al_map_rgb(0, 0, 255));
     }
     *px = x;
     *py = y;

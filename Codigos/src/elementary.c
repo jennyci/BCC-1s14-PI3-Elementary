@@ -4,11 +4,12 @@
 typedef struct {
   int pos_x,pos_y;
   ALLEGRO_BITMAP *elemento;
+  bool status;
 } Disco;
 
 bool abrirJogo(int x, int y,int *fps,int *tempo,ALLEGRO_FONT *font,ALLEGRO_COLOR font_color){
   char seg[100];
- 
+  
   if(x >=40 && x<=200 && y <=460 && y>=360){
               *fps = *fps+1;
               sprintf(seg, "%d", *tempo); 
@@ -34,6 +35,53 @@ bool abrirJogo(int x, int y,int *fps,int *tempo,ALLEGRO_FONT *font,ALLEGRO_COLOR
         
           return false;
 }
+void carregarDiscos(Disco **discos){
+  discos[1] = malloc(sizeof(Disco));
+  discos[1]->elemento = al_load_bitmap("Imagens/agua.png");
+  discos[1]->pos_x = rand()%9 * 55;
+  discos[1]->pos_y = 0;
+  discos[1]->status = false;
+  discos[2] = malloc(sizeof(Disco));
+  discos[2]->elemento = al_load_bitmap("Imagens/fogo.png");
+  discos[2]->pos_x = rand()%9 * 55;
+  discos[2]->pos_y = 0;
+  discos[2]->status = false;
+  discos[3] = malloc(sizeof(Disco));
+  discos[3]->elemento = al_load_bitmap("Imagens/planta.png");
+  discos[3]->pos_x = rand()%9 * 55;
+  discos[3]->pos_y = 0;
+  discos[3]->status = false;
+  discos[4] = malloc(sizeof(Disco));
+  discos[4]->elemento = al_load_bitmap("Imagens/agua.png");
+  discos[4]->pos_x = rand()%9 * 55;
+  discos[4]->pos_y = 0;
+  discos[4]->status = false;
+  discos[5] = malloc(sizeof(Disco));
+  discos[5]->elemento = al_load_bitmap("Imagens/fogo.png");
+  discos[5]->pos_x = rand()%9 * 55;
+  discos[5]->pos_y = 0;
+  discos[5]->status = false;
+  discos[6] = malloc(sizeof(Disco));
+  discos[6]->elemento = al_load_bitmap("Imagens/planta.png");
+  discos[6]->pos_x = rand()%9 * 55;
+  discos[6]->pos_y = 0;
+  discos[6]->status = false;
+  discos[7] = malloc(sizeof(Disco));
+  discos[7]->elemento = al_load_bitmap("Imagens/agua.png");
+  discos[7]->pos_x = rand()%9 * 55;
+  discos[7]->pos_y = 0;
+  discos[7]->status = false;
+  discos[8] = malloc(sizeof(Disco));
+  discos[8]->elemento = al_load_bitmap("Imagens/fogo.png");
+  discos[8]->pos_x = rand()%9 * 55;
+  discos[8]->pos_y = 0;
+  discos[8]->status = false;
+  discos[9] = malloc(sizeof(Disco));
+  discos[9]->elemento = al_load_bitmap("Imagens/planta.png");
+  discos[9]->pos_x = rand()%9 * 55;
+  discos[9]->pos_y = 0;
+  discos[9]->status = false;
+}
 void erro(char *mensagem) {
   fputs(mensagem, stderr);
 
@@ -52,6 +100,7 @@ int main() {
   int largura = cam->largura;
   int altura = cam->altura;
   int fps = 0,tempo = 5;
+  int ndisco = 9;
 
   if(!al_init())
     erro("erro na inicializacao do allegro\n");
@@ -86,33 +135,7 @@ int main() {
 
   al_start_timer(timer);
   
-  /**********/
-  Disco *fogo = malloc(sizeof(Disco)), *agua= malloc(sizeof(Disco)), *planta = malloc(sizeof(Disco));
-  //Criando o Disco de Fogo
-fogo->elemento = al_load_bitmap("Imagens/fogo.png");
-  if(!fogo->elemento){
-    erro("Falha ao carregar elemento Fogo");
-  }
-  fogo->pos_x = 10;
-  fogo->pos_y = 50;
-
-  //Criando o Disco de Agua
-  agua->elemento = al_load_bitmap("Imagens/agua.png");
-  if(!agua->elemento){
-    erro("Falha ao carregar elemento Agua");
-  }
-  agua->pos_x = 100;
-  agua->pos_y = 150;
-  //Criando o Disco de Planta
-  planta->elemento = al_load_bitmap("Imagens/planta.png");
-  if(!planta->elemento){
-    erro("Falha ao carregar elemento Fogo");
-  }
-  planta->pos_x = 200;
-  planta->pos_y = 250;
   unsigned char ***matriz = camera_aloca_matriz(cam);
-
-
   ALLEGRO_BITMAP *buffer = al_get_backbuffer(display);
   ALLEGRO_BITMAP *fundo = al_load_bitmap("Imagens/Elementary2.png");
 
@@ -123,12 +146,15 @@ fogo->elemento = al_load_bitmap("Imagens/fogo.png");
   ALLEGRO_BITMAP *direita = al_create_sub_bitmap(buffer, largura, 0, largura, altura);
 
   /**********/
+  Disco *discos[9];
+  carregarDiscos(discos);
 
+  int ultimoDisco = 0;
+  int distance = 0;
   int desenhar = 0;
   int terminar = 0;
   al_set_target_bitmap(esquerda);
   al_draw_bitmap(fundo,0,0,0);
-  al_draw_filled_circle(120,380,80,al_map_rgb(255,0,255));
   while(1) {
 
     ALLEGRO_EVENT event;
@@ -153,45 +179,59 @@ fogo->elemento = al_load_bitmap("Imagens/fogo.png");
       camera_atualiza(cam);
       mediana(cam);
       /**********/
-        al_set_target_bitmap(esquerda);
-         al_draw_bitmap(fundo,0,0,0);
-
-cameraRastreia(cam,&x,&y);
-        
-        if(menu){
-          if(abrirJogo(x,y,&fps,&tempo,font, font_color)){
-             fundo = al_load_bitmap("Imagens/galaxia.png");
-
-                  menu = false;
-                }
+      al_set_target_bitmap(esquerda);
+      al_draw_bitmap(fundo,0,0,0);
+      
+      if(!menu){
+        for(int aux1 = 1; aux1 <= ndisco;aux1++){
+          if((!discos[aux1]->status && distance > 200) || ultimoDisco==0 ){
+            printf("%d\n",aux1 );
+            al_draw_bitmap(discos[aux1]->elemento,discos[aux1]->pos_x,discos[aux1]->pos_y,0);
+            discos[aux1]->status = true;
+            distance = 0;
+            ultimoDisco = aux1;
+            printf("Ultimo disco: %d\n",aux1 );
+            break;
+          }else{
+            discos[aux1]->pos_y+=10;
+            al_draw_bitmap(discos[aux1]->elemento,discos[aux1]->pos_x,discos[aux1]->pos_y,0);
+          }
+            distance = discos[ultimoDisco]->pos_y;
+          /*if(discos[1]->pos_y > 480){
+            al_draw_text(font, al_map_rgb(255, 0, 0), 200, 200, 0,"VOCÊ PERDEU!!!");
+            al_flip_display();
+            al_rest(5);
+            break;
+          }
+      al_draw_text(font, al_map_rgb(255, 255, 255), 240, 5, 0,"PONTUAÇÃO");*/
         }
-              al_draw_text(font, al_map_rgb(255, 255, 255), 240, 5, 0,"PONTUAÇÃO");
-              al_draw_bitmap(fogo->elemento,fogo->pos_x,fogo->pos_y,0);
-              fogo->pos_y+=10;
-              if(fogo->pos_y > 480){
-              al_draw_text(font, al_map_rgb(255, 255, 255), 240, 5, 0,"VOCÊ PERDEU INUTIL");
-          al_flip_display();
-              al_rest(5);
-              break;
-            }
-            /**********/
-          al_set_target_bitmap(direita);
-          camera_copia(cam, cam->quadro, direita);
-          al_flip_display();
 
-
+      }
+      if(menu){
+        if(abrirJogo(x,y,&fps,&tempo,font, font_color)){
+          fundo = al_load_bitmap("Imagens/galaxia.png");
+          menu = false;
         }
+      }
+      cameraRastreia(cam,&x,&y);
+      
+
+      al_set_target_bitmap(direita);
+      camera_copia(cam, cam->quadro, direita);
+      al_flip_display();
     }
-
-  /**********/
-
+  }
   al_destroy_bitmap(direita);
   al_destroy_bitmap(fundo);
   al_destroy_bitmap(esquerda);
-
   camera_libera_matriz(cam, matriz);
-  free(fogo);free(planta);free(agua);
-  /**********/
+int fri = 9;
+while(fri != 0){
+  free(discos[fri]);
+  fri--;
+
+}
+
 
   al_stop_timer(timer);
 
