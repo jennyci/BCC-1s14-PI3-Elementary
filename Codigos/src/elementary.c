@@ -108,6 +108,7 @@ void erro(char *mensagem) {
 int main() {
   bool menu = true;
   char pontuacao[100];
+  char vida[100];
   ALLEGRO_COLOR  font_color;
   ALLEGRO_FONT *font,*font2;
   ALLEGRO_AUDIO_STREAM *musica = NULL;
@@ -133,7 +134,7 @@ int main() {
     font_color = al_map_rgb(0, 0, 0);
     
     font = al_load_ttf_font("Fontes/Blokletters-Viltstift.ttf", 20, 0);
-    font2 = al_load_ttf_font("Fontes/Blokletters-Viltstift.ttf", 40, 0);
+    font2 = al_load_ttf_font("Fontes/Blokletters-Viltstift.ttf", 50, 0);
     
 
 
@@ -197,6 +198,7 @@ int main() {
   carregarDiscos(discos);
   int pontos=0,velo = 1;
   int aux1 = 1;
+  int vidas = 10;
   int ultimoDisco = 0;
   int distance = 0;
   int desenhar = 0;
@@ -254,17 +256,16 @@ int main() {
           if(discos[aux1]->pos_x >= x-30 && discos[aux1]->pos_x <= x+30 && discos[aux1]->pos_y >= y-30 &&  discos[aux1]->pos_y <= y+30){
             if(discos[aux1]->tipo == 2){ // Tipo do fogo(Necessario para vencer o jogo)
             pontos +=10;
-            velo += 2;
+            velo += 1;
             discos[aux1]->pos_x = rand()%9 * 55;
             discos[aux1]->pos_y = 0;
             discos[aux1]->status = false;
           }else if(discos[aux1]->tipo == 1){ //Tipo da agua(Perde o jogo se destruir esse disco)
-            al_draw_text(font2, al_map_rgb(255, 0, 0), 70, 200, 0,"VOCÊ PERDEU!!!");
-            sprintf(pontuacao,"PONTUAÇÃO FINAL: %d",pontos);
-            al_draw_text(font2, al_map_rgb(255, 255, 255), 50, 260, 0,pontuacao);
+            discos[aux1]->pos_x = rand()%9 * 55;
+            discos[aux1]->pos_y = 0;
+            discos[aux1]->status = false;
             al_flip_display();
-            al_rest(3);
-            perdeu = true;
+            vidas--;
           }else if(discos[aux1]->tipo == 3){//Tipo planta(Aumenta velocidade de queda das peças)
             velo *= 2;
             discos[aux1]->pos_x = rand()%9 * 55;
@@ -274,12 +275,11 @@ int main() {
 
         }else if( discos[aux1]->pos_y > 480){
           if(discos[aux1]->tipo == 2){ //Tipo da agua e Planta(Não perde se deixar cair)
-            al_draw_text(font2, al_map_rgb(255, 0, 0), 70, 200, 0,"VOCÊ PERDEU!!!");
-            sprintf(pontuacao,"PONTUAÇÃO FINAL: %d",pontos);
-            al_draw_text(font2, al_map_rgb(255, 255, 255), 50,260, 0,pontuacao);
+               discos[aux1]->pos_x = rand()%9 * 55;
+            discos[aux1]->pos_y = 0;
+            discos[aux1]->status = false;
             al_flip_display();
-            al_rest(2);
-            perdeu = true;
+            vidas--;
           }else{
             discos[aux1]->pos_x = rand()%9 * 55;
             discos[aux1]->pos_y = 0;
@@ -291,10 +291,24 @@ int main() {
         aux1 = 1;
       sprintf(pontuacao,"PONTUAÇÃO: %d",pontos);
       al_draw_text(font, al_map_rgb(255, 255, 255), 50, 5, 0,pontuacao);
+       sprintf(vida,"VIDAS: %d",vidas);
+      al_draw_text(font, al_map_rgb(255, 255, 255), 300, 5, 0,vida);
+      al_flip_display();
 
       }
-      if(perdeu)
+       if(perdeu){
+        al_draw_text(font2, al_map_rgb(255, 0, 0), 50, 100, 0,"PONTUAÇÃO FINAL");
+        sprintf(pontuacao,"%d",pontos);
+        al_draw_text(font2, al_map_rgb(255, 0, 0), 250, 170, 0,pontuacao);
+        al_flip_display();
+        al_rest(3);
         break;
+      }
+       
+      if(vidas == 0){
+        perdeu = true;
+      }
+
       if(menu){
         if(abrirJogo(x,y,&fps,&tempo,font,font2, font_color)){
           fundo = al_load_bitmap("Imagens/galaxia.png");

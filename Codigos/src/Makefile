@@ -8,7 +8,7 @@ LIBS = -lopencv_core -lopencv_highgui -lallegro -lallegro_main -lallegro_image -
 
 all: $(TARGETS)
 
-camera.o: camera.c camera.h
+camera.o: camera.c camera.h 
 	$(CC) $(FLAGS) $< -c
 
 Elementary: elementary.c camera.o

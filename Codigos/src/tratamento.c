@@ -1,6 +1,6 @@
 #include "bibliotecas.h"
 
-void RGB2HSV(int red, int green, int blue, int *h, int *s, int *v){
+  void RGB2HSV(int red, int green, int blue, int *h, int *s, int *v){
   float r = (float)red/255;
   float g = (float)green/255;
   float b = (float)blue/255;
@@ -91,7 +91,11 @@ void cameraRastreia( camera *cam,int *px, int *py){
         x = cxr / cnr;
         y = cyr / cnr;
         al_draw_circle(x, y, 10, al_map_rgb(0, 0, 255),1);
-        al_draw_filled_circle(x, y, 2, al_map_rgb(0, 0, 255));
+        al_draw_circle(x, y, 20, al_map_rgb(0, 0, 255),1);
+        al_draw_circle(x, y, 30, al_map_rgb(0, 0, 255),1);
+        al_draw_circle(x, y, 40, al_map_rgb(0, 0, 255),1);
+        al_draw_circle(x, y, 50, al_map_rgb(0, 0, 255),1);
+        al_draw_filled_circle(x, y, 5, al_map_rgb(0, 0, 255));
     }
     *px = x;
     *py = y;
